@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import produtosnaturais.Telas;
 import produtosnaturais.Usuario;
+
 /**
  *
  * @author aluno
@@ -22,13 +23,10 @@ public class ProdutosNaturais {
          Telas tela  = new Telas();
          List<Usuario> usuariosCadastrados;
           
-         tela.loginUsuario();
          tela.cadastrarUsuario();
          tela.cadastrarProdutos();
-         
-        
-
-       
+         tela.loginUsuario();
+         tela.msgErro();
         
     }
     
