@@ -5,6 +5,7 @@
 package produtosnaturais;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,47 +17,49 @@ public class Telas {
     public void cadastrarUsuario(){
         System.out.println("--- Cadastro de Usuário ---");
         System.out.println("nome:");
-        String nome = scanner.nextLine();
+        String nome = JOptionPane.showInputDialog(null,"Digite seu nome:");
         System.out.println("e-mail:");
-        String email = scanner.nextLine();
+        String email = JOptionPane.showInputDialog(null,"Digite seu email:");
         System.out.println("senha:");
-        String senha = scanner.nextLine();
+        String senha = JOptionPane.showInputDialog(null,"Digite a senha:");
         System.out.println("telefone:");
-        String telefone = scanner.nextLine();
+        double telefone = Double.parseDouble(JOptionPane.showInputDialog(null,"Digite seu telefone:"));
     }
     
     public void cadastrarProdutos(){
         System.out.println("--- Cadastro de Produtos ---");
         System.out.println("nome:");
-        String nome = scanner.nextLine();
+        String nome = JOptionPane.showInputDialog(null,"Nome do Produto:");
         System.out.println("Descrição:");
-        String descricao = scanner.nextLine();
+        String descricao = JOptionPane.showInputDialog(null,"Descrição do Produto:");
         System.out.println("Preço:");
-        String preco = scanner.nextLine();
+        String preco = JOptionPane.showInputDialog(null,"Preço do Produto:");
         System.out.println("Categoria:");
-        String categoria = scanner.nextLine();
+        String categoria = JOptionPane.showInputDialog(null,"Categoria:");
     }
    
     public void loginUsuario(){
         System.out.println("--- Login do Usuário ---");
         System.out.println("Email:");
-        String email = scanner.nextLine();
+        String email = JOptionPane.showInputDialog(null,"Digite seu nome:");
         System.out.println("Senha:");
-        String senha = scanner.nextLine();
+        String senha = JOptionPane.showInputDialog(null,"Digite a senha:");
         
     }
+    /*
      public void exibirPortifolio(){
        int i = 0;
-       //usuariologado é um exemplo. Este nome precisa ser mudado para o parâmetro que será inserido posteriormente.
-       //for(int i = 0; i < usuariologado.produtos.size() ; i++){
-        //   System.out.println("Produtos:" + produto.getProduto());
+       usuariologado é um exemplo. Este nome precisa ser mudado para o parâmetro que será inserido posteriormente.
+       for(int i = 0; i < usuariologado.produtos.size() ; i++){
+         System.out.println("Produtos:" + produto.getProduto());
+         
            
            
-      // }
+       }
         
         
     }
-     
+     */
      public void msgErro(){
         System.out.println("Erro de validação ");
         System.out.println("E");
