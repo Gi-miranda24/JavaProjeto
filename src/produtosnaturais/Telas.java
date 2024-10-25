@@ -14,6 +14,35 @@ import javax.swing.JOptionPane;
 public class Telas {
     Scanner scanner = new Scanner(System.in);
     
+    public void inicial() {
+        int continuar = 0;
+        do{
+        System.out.println("--- Bem-vindo ao Natural Point! ---");
+        System.out.println("Digite uma das seguintes opções:");
+        System.out.printf("""
+                          1. Login como cliente\n
+                          2. Cadastro como cliente\n
+                          0. Encerrar interação.
+                          """);
+        System.out.println("Digite sua opção: ");
+        int opcao = scanner.nextInt();
+        switch(opcao){
+            case 1:
+                loginUsuario();
+                break;
+            case 2: 
+                cadastrarUsuario();
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Opção inválida. Digite uma opção válida para continuar.");
+                
+        }
+        }while(continuar == 0);
+        
+    }
+    
     public void cadastrarUsuario(){
         System.out.println("--- Cadastro de Usuário ---");
         System.out.println("nome:");

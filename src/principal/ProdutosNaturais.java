@@ -23,10 +23,7 @@ public class ProdutosNaturais {
          Telas tela  = new Telas();
          List<Usuario> usuariosCadastrados;
           
-         tela.cadastrarUsuario();
-         tela.cadastrarProdutos();
-         tela.loginUsuario();
-         tela.msgErro();
+         tela.inicial();
         
     }
     
