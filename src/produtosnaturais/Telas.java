@@ -4,6 +4,8 @@
  */
 package produtosnaturais;
 
+import java.awt.Frame;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -13,11 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class Telas {
     Scanner scanner = new Scanner(System.in);
+    Frame frame = new Frame();
     
     public void inicial() {
-        int continuar = 0;
-        do{
-        System.out.println("--- Bem-vindo ao Natural Point! ---");
+        boolean continuar = true;
+        int opcao = 0;
+       
+        System.out.println("--- Bem-vindo a Natural Point! ---");
         System.out.println("Digite uma das seguintes opções:");
         System.out.printf("""
                           1. Login como cliente\n
@@ -25,34 +29,44 @@ public class Telas {
                           0. Encerrar interação.
                           """);
         System.out.println("Digite sua opção: ");
-        int opcao = scanner.nextInt();
-        switch(opcao){
-            case 1:
-                loginUsuario();
-                break;
-            case 2: 
-                cadastrarUsuario();
-                break;
-            case 0:
-                return;
-            default:
-                System.out.println("Opção inválida. Digite uma opção válida para continuar.");
-                
-        }
-        }while(continuar == 0);
         
+        try {
+            do{
+                opcao = scanner.nextInt();
+                // Se a leitura for bem-sucedida, você pode sair do loop.
+                switch(opcao){
+                    case 1:
+                    loginUsuario();
+                    break;
+                case 2: 
+                    cadastrarUsuario();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("""
+                                       Opção inválida. Digite uma opção existente para continuar: """);
+                    break;
+                }   
+            }while(continuar);
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: Você deve digitar um número inteiro.");
+                // Limpa o buffer do scanner
+                scanner.next(); // Consumir o valor inválido
+            }
     }
     
     public void cadastrarUsuario(){
         System.out.println("--- Cadastro de Usuário ---");
         System.out.println("nome:");
-        String nome = JOptionPane.showInputDialog(null,"Digite seu nome:");
+        String nome = JOptionPane.showInputDialog(frame,"Digite seu nome:");
+        frame.setFocusable(true);
         System.out.println("e-mail:");
-        String email = JOptionPane.showInputDialog(null,"Digite seu email:");
+        String email = JOptionPane.showInputDialog(frame,"Digite seu email:");
         System.out.println("senha:");
-        String senha = JOptionPane.showInputDialog(null,"Digite a senha:");
+        String senha = JOptionPane.showInputDialog(frame,"Digite a senha:");
         System.out.println("telefone:");
-        double telefone = Double.parseDouble(JOptionPane.showInputDialog(null,"Digite seu telefone:"));
+        double telefone = Double.parseDouble(JOptionPane.showInputDialog(frame,"Digite seu telefone:"));
     }
     
     public void cadastrarProdutos(){
