@@ -64,9 +64,10 @@ public class Telas {
         System.out.println("e-mail:");
         String email = JOptionPane.showInputDialog(frame,"Digite seu email:");
         System.out.println("senha:");
-        String senha = JOptionPane.showInputDialog(frame,"Digite a senha:");
-        System.out.println("telefone:");
-        double telefone = Double.parseDouble(JOptionPane.showInputDialog(frame,"Digite seu telefone:"));
+        String senha = JOptionPane.showInputDialog(null,
+                "Senha deve ter 8 caracteres, pelo menos um número, uma letra maiúscula e um caractere especial"+"Digite a senha:");
+        double telefone = Double.parseDouble(JOptionPane.showInputDialog(null,"Digite seu telefone:"));
+
     }
     
     public void cadastrarProdutos(){
