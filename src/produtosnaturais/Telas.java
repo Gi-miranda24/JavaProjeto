@@ -29,11 +29,18 @@ public class Telas {
                           0. Encerrar interação.
                           """);
         System.out.println("Digite sua opção: ");
-        
+        do{
         try {
-            do{
-                opcao = scanner.nextInt();
+                String input = scanner.nextLine();
                 // Se a leitura for bem-sucedida, você pode sair do loop.
+                try {
+                        opcao = Integer.parseInt(input); // Converte a string para inteiro
+                         // Se a conversão for bem-sucedida, sai do loop
+                }catch (NumberFormatException e) {
+                        System.out.printf("Erro: Você deve digitar um número inteiro válido. Digite sua opção: ");
+                        continue;
+                }
+                
                 switch(opcao){
                     case 1:
                     loginUsuario();
@@ -44,16 +51,17 @@ public class Telas {
                 case 0:
                     return;
                 default:
-                    System.out.println("""
+                    System.out.printf("""
                                        Opção inválida. Digite uma opção existente para continuar: """);
                     break;
-                }   
-            }while(continuar);
+                }
+            
             } catch (InputMismatchException e) {
-                System.out.println("Erro: Você deve digitar um número inteiro.");
+                System.out.printf("Opção inválida. Digite uma opção existente para continuar: ");
                 // Limpa o buffer do scanner
                 scanner.next(); // Consumir o valor inválido
             }
+        }while(continuar);
     }
     
     public void cadastrarUsuario(){
@@ -67,7 +75,7 @@ public class Telas {
         String senha = JOptionPane.showInputDialog(null,
                 "Senha deve ter 8 caracteres, pelo menos um número, uma letra maiúscula e um caractere especial"+"Digite a senha:");
         double telefone = Double.parseDouble(JOptionPane.showInputDialog(null,"Digite seu telefone:"));
-
+        scanner.next();
     }
     
     public void cadastrarProdutos(){
