@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package produtosnaturais;
 
 import java.awt.Frame;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,66 +13,48 @@ import javax.swing.JOptionPane;
 public class Telas {
     Scanner scanner = new Scanner(System.in);
     Frame frame = new Frame();
+    Servico servico = new Servico();
     
     public void inicial() {
-        boolean continuar = true;
-        int opcao = 0;
-       
-        System.out.println("--- Bem-vindo a Natural Point! ---");
-        System.out.println("Digite uma das seguintes opções:");
-        System.out.printf("""
-                          1. Login como cliente\n
-                          2. Cadastro como cliente\n
-                          0. Encerrar interação.
-                          """);
-        System.out.println("Digite sua opção: ");
-        do{
-        try {
-                String input = scanner.nextLine();
-                // Se a leitura for bem-sucedida, você pode sair do loop.
-                try {
-                        opcao = Integer.parseInt(input); // Converte a string para inteiro
-                         // Se a conversão for bem-sucedida, sai do loop
-                }catch (NumberFormatException e) {
-                        System.out.printf("Erro: Você deve digitar um número inteiro válido. Digite sua opção: ");
-                        continue;
+        while (true) {
+            System.out.println("Bem-vindo a Natural Point! Digite uma das opções disponíveis:");
+            System.out.println("1. Login como cliente");
+            System.out.println("2. Cadastro como usuário");
+            System.out.println("0. Encerrar sistema");
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "1" -> loginUsuario();
+                case "2" -> cadastrarUsuario();
+                case "0" -> {
+                    System.out.println("Sistema encerrado.");
+                    scanner.close();
+                    return; // Sai do método e encerra o programa
                 }
-                
-                switch(opcao){
-                    case 1:
-                    loginUsuario();
-                    break;
-                case 2: 
-                    cadastrarUsuario();
-                    break;
-                case 0:
-                    return;
-                default:
-                    System.out.printf("""
-                                       Opção inválida. Digite uma opção existente para continuar: """);
-                    break;
-                }
-            
-            } catch (InputMismatchException e) {
-                System.out.printf("Opção inválida. Digite uma opção existente para continuar: ");
-                // Limpa o buffer do scanner
-                scanner.next(); // Consumir o valor inválido
+                default -> System.out.println("Opção inválida! Tente novamente.");
             }
-        }while(continuar);
+        }
     }
     
     public void cadastrarUsuario(){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("--- Cadastro de Usuário ---");
         System.out.println("nome:");
-        String nome = JOptionPane.showInputDialog(frame,"Digite seu nome:");
-        frame.setFocusable(true);
+        scanner.nextLine();
+        String nome = scanner.nextLine();
         System.out.println("e-mail:");
-        String email = JOptionPane.showInputDialog(frame,"Digite seu email:");
+        String email = scanner.nextLine();
         System.out.println("senha:");
-        String senha = JOptionPane.showInputDialog(null,
-                "Senha deve ter 8 caracteres, pelo menos um número, uma letra maiúscula e um caractere especial"+"Digite a senha:");
-        double telefone = Double.parseDouble(JOptionPane.showInputDialog(null,"Digite seu telefone:"));
+        String senha = scanner.nextLine();
+        System.out.println("Digite o telefone abaixo:");
+        String telefone = scanner.nextLine();
+        
+        Usuario user = new Usuario(nome,email,senha,telefone);
+        servico.usuariosCadastrados.add(user);
+        System.out.println(servico.usuariosCadastrados.get(0));
         scanner.next();
+        scanner.close();
     }
     
     public void cadastrarProdutos(){
@@ -90,14 +69,39 @@ public class Telas {
         String categoria = JOptionPane.showInputDialog(null,"Categoria:");
     }
    
-    public void loginUsuario(){
-        System.out.println("--- Login do Usuário ---");
-        System.out.println("Email:");
-        String email = JOptionPane.showInputDialog(null,"Digite seu nome:");
-        System.out.println("Senha:");
-        String senha = JOptionPane.showInputDialog(null,"Digite a senha:");
-        
+    public void loginUsuario() {
+        String email;
+        String senha;
+
+        while (true) {
+            System.out.println("Caso deseje voltar ao último menu, digite 0 e confirme");
+            System.out.printf("Digite seu email: ");
+            email = scanner.nextLine();
+            
+            if (email.equals("0")) {
+                return; // Volta para o menu inicial
+            }
+            
+            System.out.printf("Digite sua senha: ");
+            senha = scanner.nextLine();
+
+            
+
+            if (senha.equals("0")) {
+                return; // Volta para o menu inicial
+            }
+
+            // Aqui você deve verificar as credenciais do usuário.
+            // Por enquanto, vamos usar credenciais fictícias.
+            if (email.equals("usuario@exemplo.com") && senha.equals("senha123")) {
+                //exibirPortfolio(); // Redireciona para exibirPortfolio
+                return; // Sai do método após o sucesso
+            } else {
+                System.out.println("Credenciais incorretas. Tente novamente ou digite '0' para voltar.");
+            }
+        }
     }
+    
     /*
      public void exibirPortifolio(){
        int i = 0;
@@ -112,7 +116,7 @@ public class Telas {
         
     }
      */
-     public void msgErro(){
+    public void msgErro(){
         System.out.println("Erro de validação ");
         System.out.println("E");
         String email = scanner.nextLine();
